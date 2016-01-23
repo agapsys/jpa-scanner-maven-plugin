@@ -30,7 +30,7 @@ import java.net.URLClassLoader;
 class JarFile {
 	// CLASS SCOPE =============================================================
 	/** Embedded resource inside a JAR file. */
-	public static final String EMBEDDED_XML = "META-INF/" + CreateJpaInfoXmlMojo.OUTPUT_FILENAME;
+	public static final String EMBEDDED_XML = "META-INF/" + CreateMojo.OUTPUT_FILENAME;
 	
 	/**
 	 * Returns JPA information contained in jar file

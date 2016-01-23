@@ -29,8 +29,8 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
 
-@Mojo(name = "create-jpa-info-xml", defaultPhase = LifecyclePhase.GENERATE_RESOURCES, requiresDependencyResolution = ResolutionScope.COMPILE)
-public class CreateJpaInfoXmlMojo extends AbstractMojo {
+@Mojo(name = "create", defaultPhase = LifecyclePhase.GENERATE_RESOURCES, requiresDependencyResolution = ResolutionScope.COMPILE)
+public class CreateMojo extends AbstractMojo {
 	// CLASS SCOPE =============================================================
 	static final String OUTPUT_FILENAME = "jpa-info.xml";
 	// =========================================================================

@@ -30,8 +30,8 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
 
-@Mojo(name = "list-jpa-classes", defaultPhase = LifecyclePhase.GENERATE_RESOURCES, requiresDependencyResolution = ResolutionScope.COMPILE)
-public class ListJpaClassesMojo extends AbstractMojo {
+@Mojo(name = "list", defaultPhase = LifecyclePhase.GENERATE_RESOURCES, requiresDependencyResolution = ResolutionScope.COMPILE)
+public class ListMojo extends AbstractMojo {
 
 	@Parameter(property = "project", readonly = true)
 	private MavenProject mavenProject;
