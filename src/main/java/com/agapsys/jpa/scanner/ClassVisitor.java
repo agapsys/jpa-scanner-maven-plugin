@@ -33,11 +33,11 @@ import java.util.regex.Pattern;
 
 class ClassVisitor extends VoidVisitorAdapter {
 	// CLASS SCOPE =============================================================
-	private static final String ENTITY_ANNOTATION_CLASS             = "javax.persistence.Entity";
-	private static final String CONVERTER_ANNOTATION_CLASS          = "javax.persistence.Converter";
+	private static final String ENTITY_ANNOTATION_CLASS            = "javax.persistence.Entity";
+	private static final String CONVERTER_ANNOTATION_CLASS        = "javax.persistence.Converter";
 	private static final String ATTRIBUTE_CONVERTER_INTERFACE_CLASS = "javax.persistence.AttributeConverter";
 	
-	private static final String ENTITY_ANNOTATION    = "Entity";
+	private static final String ENTITY_ANNOTATION     = "Entity";
 	private static final String CONVERTER_ANNOTATION = "Converter";
 	
 	private static final String ATTRIBUTE_CONVERTER_INTERFACE = "AttributeConverter";
