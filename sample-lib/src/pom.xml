@@ -45,7 +45,7 @@ limitations under the License.
 				<executions>
 					<execution>
 						<goals>
-							<goal>create-jpa-info-xml</goal>  
+							<goal>create</goal>  
 						</goals>
 					</execution>
 				</executions>

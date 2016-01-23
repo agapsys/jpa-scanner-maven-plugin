@@ -25,11 +25,13 @@ public class JarFileTest {
 	public void test() {
 		
 		JpaInfo expectedJarInfo = new JpaInfo(
-			"com.example.Converter2", 
+			"com.example.Converter2.InnerConverter",
+			"com.example.Converter2",
 			"com.example.Converter3",
-			"com.example.Entity2", 
-			"com.example.Entity3", 
-			"com.example.Converter1", 
+			"com.example.Entity2",
+			"com.example.Entity3",
+			"com.example.SimpleEnum.InnerConverter",
+			"com.example.Converter1",
 			"com.example.Entity1"
 		);
 		
