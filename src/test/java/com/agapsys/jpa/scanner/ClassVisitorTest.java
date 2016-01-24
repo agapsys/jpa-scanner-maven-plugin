@@ -54,4 +54,27 @@ public class ClassVisitorTest {
 		
 		Assert.assertEquals(expectedClasses, cv.getJpaClasses());
 	}
+	
+	@Test
+	public void testInvalidEntity() throws FileNotFoundException, ParseException, IOException {
+		String fileSeparator = System.getProperty("file.separator");
+		
+		Set<String> expectedClasses = new LinkedHashSet<String>();
+		
+		File srcFile = new File(Defs.LIB_SRC_DIR, String.format("com%sexample%sInvalidEntity.java", fileSeparator, fileSeparator));
+
+		FileInputStream fis = new FileInputStream(srcFile);
+
+		CompilationUnit cu;
+		try {
+			cu = JavaParser.parse(fis);
+		} finally {
+			fis.close();
+		}
+
+		ClassVisitor cv = new ClassVisitor();
+		cv.visit(cu, null);
+		
+		Assert.assertEquals(expectedClasses, cv.getJpaClasses());
+	}
 }

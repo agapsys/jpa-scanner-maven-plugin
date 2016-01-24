@@ -108,6 +108,9 @@ class ClassVisitor extends VoidVisitorAdapter {
 	
 	@Override
 	public void visit(ClassOrInterfaceDeclaration n, Object arg) {
+		if (!ModifierSet.hasModifier(n.getModifiers(), ModifierSet.PUBLIC))
+			return;
+		
 		// Recursive workaround to fix inner classes detection:
 		for (BodyDeclaration bd : n.getMembers()) {
 			if (bd instanceof ClassOrInterfaceDeclaration) {
