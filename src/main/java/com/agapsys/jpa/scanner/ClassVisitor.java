@@ -68,6 +68,7 @@ class ClassVisitor extends VoidVisitorAdapter {
 	@Override
 	public void visit(PackageDeclaration n, Object arg) {
 		cuPackage = n.getName().toString();
+		super.visit(n, arg);
 	}
 	
 	@Override
@@ -81,6 +82,7 @@ class ClassVisitor extends VoidVisitorAdapter {
 		} else if (importStr.equals(ATTRIBUTE_CONVERTER_INTERFACE_CLASS)) {
 			attributeConverterInterfaceImport = true;
 		}
+		super.visit(n, arg);
 	}
 	
 	private boolean passModifiers(String packageName, String className, TypeDeclaration n) {
