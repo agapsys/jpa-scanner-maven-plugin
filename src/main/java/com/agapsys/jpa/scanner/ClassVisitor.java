@@ -20,7 +20,6 @@ import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.ImportDeclaration;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.PackageDeclaration;
-import com.github.javaparser.ast.body.BodyDeclaration;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.ModifierSet;
 import com.github.javaparser.ast.body.TypeDeclaration;
@@ -107,56 +106,50 @@ class ClassVisitor extends VoidVisitorAdapter {
 		return getClassName((TypeDeclaration) parentNode) + "." + className;
 	}
 	
-	
 	@Override
 	public void visit(ClassOrInterfaceDeclaration n, Object arg) {
-		if (!ModifierSet.hasModifier(n.getModifiers(), ModifierSet.PUBLIC))
-			return;
-		
-		// Recursive workaround to fix inner classes detection:
-		for (BodyDeclaration bd : n.getMembers()) {
-			if (bd instanceof ClassOrInterfaceDeclaration) {
-				visit((ClassOrInterfaceDeclaration) bd, null);
-			}
-		}
-		
-		String currentClassName = cuPackage.isEmpty() ? getClassName(n) : cuPackage + "." + getClassName(n);
-		
-		if (n.getAnnotations() != null) {
-			for (AnnotationExpr annotation : n.getAnnotations()) {
-				String annotationName = annotation.getName().getName();
-				
-				boolean isEntityAnnotation = (annotationName.equals(ENTITY_ANNOTATION) && entityAnnotationImport) || annotationName.equals(ENTITY_ANNOTATION_CLASS);
-				boolean isConverterAnnotation = (annotationName.equals(CONVERTER_ANNOTATION) && converterAnnotationImport) || annotationName.equals(CONVERTER_ANNOTATION_CLASS);
-				
-				String modifiersErrMsg = String.format("Invalid modifiers for class '%s'", currentClassName);
-				
-				if (isEntityAnnotation) {
-					if (!passModifiers(cuPackage, currentClassName, n))
-						throw new RuntimeException(modifiersErrMsg);
-					
-					jpaClasses.add(currentClassName);
-					
-				} else if (isConverterAnnotation) {
-					String errMsg = String.format("Converter class '%s' does not implement '%s'", currentClassName, ATTRIBUTE_CONVERTER_INTERFACE_CLASS);
-					
-					if (!attributeConverterInterfaceImport)
-						throw new ParsingException(errMsg);
-					
-					for (ClassOrInterfaceType cOrI : n.getImplements()) {
-						boolean isAttributeConverterInterface = (cOrI.getName().equals(ATTRIBUTE_CONVERTER_INTERFACE) && attributeConverterInterfaceImport) || cOrI.getName().equals(ATTRIBUTE_CONVERTER_INTERFACE_CLASS);
-						
-						if (isAttributeConverterInterface) {
-							if (!passModifiers(cuPackage, currentClassName, n))
-								throw new ParsingException(modifiersErrMsg);
-							jpaClasses.add(currentClassName);
-							break;
+		if (ModifierSet.hasModifier(n.getModifiers(), ModifierSet.PUBLIC)) {
+			
+			String currentClassName = cuPackage.isEmpty() ? getClassName(n) : cuPackage + "." + getClassName(n);
+
+			if (n.getAnnotations() != null) {
+				for (AnnotationExpr annotation : n.getAnnotations()) {
+					String annotationName = annotation.getName().getName();
+
+					boolean isEntityAnnotation = (annotationName.equals(ENTITY_ANNOTATION) && entityAnnotationImport) || annotationName.equals(ENTITY_ANNOTATION_CLASS);
+					boolean isConverterAnnotation = (annotationName.equals(CONVERTER_ANNOTATION) && converterAnnotationImport) || annotationName.equals(CONVERTER_ANNOTATION_CLASS);
+
+					String modifiersErrMsg = String.format("Invalid modifiers for class '%s'", currentClassName);
+
+					if (isEntityAnnotation) {
+						if (!passModifiers(cuPackage, currentClassName, n))
+							throw new RuntimeException(modifiersErrMsg);
+
+						jpaClasses.add(currentClassName);
+
+					} else if (isConverterAnnotation) {
+						String errMsg = String.format("Converter class '%s' does not implement '%s'", currentClassName, ATTRIBUTE_CONVERTER_INTERFACE_CLASS);
+
+						if (!attributeConverterInterfaceImport)
+							throw new ParsingException(errMsg);
+
+						for (ClassOrInterfaceType cOrI : n.getImplements()) {
+							boolean isAttributeConverterInterface = (cOrI.getName().equals(ATTRIBUTE_CONVERTER_INTERFACE) && attributeConverterInterfaceImport) || cOrI.getName().equals(ATTRIBUTE_CONVERTER_INTERFACE_CLASS);
+
+							if (isAttributeConverterInterface) {
+								if (!passModifiers(cuPackage, currentClassName, n))
+									throw new ParsingException(modifiersErrMsg);
+								jpaClasses.add(currentClassName);
+								break;
+							}
+
+							throw new ParsingException(errMsg);
 						}
-						
-						throw new ParsingException(errMsg);
 					}
 				}
 			}
+			
+			super.visit(n, arg);
 		}
 	}
 	

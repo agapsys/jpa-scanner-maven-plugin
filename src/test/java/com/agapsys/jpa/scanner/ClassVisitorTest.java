@@ -73,8 +73,8 @@ public class ClassVisitorTest {
 		}
 
 		ClassVisitor cv = new ClassVisitor();
-		cv.visit(cu, null);
 		
+		cv.visit(cu, null);
 		Assert.assertEquals(expectedClasses, cv.getJpaClasses());
 	}
 }
