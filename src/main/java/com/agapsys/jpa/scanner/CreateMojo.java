@@ -32,21 +32,27 @@ import org.apache.maven.project.MavenProject;
 @Mojo(name = "create", defaultPhase = LifecyclePhase.GENERATE_RESOURCES, requiresDependencyResolution = ResolutionScope.COMPILE)
 public class CreateMojo extends AbstractMojo {
 	// CLASS SCOPE =============================================================
-	static final String OUTPUT_FILENAME = "jpa-info.xml";
+	static final String OUTPUT_FILENAME = "jpa.info";
 	// =========================================================================
 	
 	// INSTANCE SCOPE ==========================================================	
 	@Parameter(property = "project", readonly = true)
 	private MavenProject mavenProject;
 	
+	@Parameter(defaultValue = "false")
+	private boolean processDependencies;
+	
+	@Parameter(defaultValue = "false")
+	private boolean test;
+	
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		try {
-			File sourceDir = new File(mavenProject.getBuild().getSourceDirectory());
-			JpaInfo srcDirInfo = SourceDirectory.getJpaInfo(sourceDir);
+			
+			JpaInfo jpaInfo = ListMojo.getJpaInfo(mavenProject, processDependencies, test);
 			
 			String fileSeparator = FileUtils.FOLDER_DELIMITER;
-			String outputDirectoryPath = String.format("%s%sMETA-INF", mavenProject.getBuild().getOutputDirectory(), fileSeparator);
+			String outputDirectoryPath = String.format("%s%sMETA-INF", test ? mavenProject.getBuild().getTestOutputDirectory() :  mavenProject.getBuild().getOutputDirectory(), fileSeparator);
 			
 			File outputDirectory = FileUtils.getOrCreateDirectory(outputDirectoryPath);
 			File outputFile = new File(outputDirectory, OUTPUT_FILENAME);
@@ -55,7 +61,7 @@ public class CreateMojo extends AbstractMojo {
 			String ioErrMsg = "Error generating file: " + outputFile.getAbsolutePath();
 			try {
 				os = new FileOutputStream(outputFile);
-				srcDirInfo.toXml(os);
+				jpaInfo.toXml(os);
 			} catch (IOException ex) {
 				throw new MojoFailureException(ioErrMsg);
 			} finally {

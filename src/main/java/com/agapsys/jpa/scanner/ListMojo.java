@@ -17,6 +17,7 @@
 package com.agapsys.jpa.scanner;
 
 import java.io.File;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -32,36 +33,58 @@ import org.apache.maven.project.MavenProject;
 
 @Mojo(name = "list", defaultPhase = LifecyclePhase.GENERATE_RESOURCES, requiresDependencyResolution = ResolutionScope.COMPILE)
 public class ListMojo extends AbstractMojo {
+	// STATIC SCOPE ============================================================
+	static JpaInfo getJpaInfo(MavenProject mavenProject, boolean includeDependencies, boolean includeTest) {
+		List<JpaInfo> jpaInfoList = new LinkedList<JpaInfo>();
+		
+		// Scan sources...
+		List<String> srcDirList = new LinkedList<String>();
+		srcDirList.add(mavenProject.getBuild().getSourceDirectory());
+		
+		if (includeTest) 
+			srcDirList.add(mavenProject.getBuild().getTestSourceDirectory());
 
+		for (String srcDir : srcDirList) {
+			jpaInfoList.add(SourceDirectory.getJpaInfo(new File(srcDir)));
+		}
+
+		// Scan dependencies...
+		if (includeDependencies) {
+			Set<Artifact> dependencies = new LinkedHashSet<Artifact>();
+			dependencies.addAll(mavenProject.getArtifacts());
+			
+			if (includeTest) 
+				dependencies.addAll(mavenProject.getTestArtifacts());
+
+			for (Artifact artifact : dependencies) {
+				JpaInfo tmpInfo = JarFile.getJpaInfo(artifact.getFile());
+				if (tmpInfo != null)
+					jpaInfoList.add(tmpInfo);
+			}
+		}
+		
+		// Global JPA information...
+		return new JpaInfo(jpaInfoList.toArray(new JpaInfo[jpaInfoList.size()]));
+	}
+	// =========================================================================
+
+	// INSTANCE SCOPE ==========================================================
 	@Parameter(property = "project", readonly = true)
 	private MavenProject mavenProject;
 
 	@Parameter(defaultValue = "jpa-classes")
 	private String filterProperty;
+	
+	@Parameter(defaultValue = "true")
+	private boolean processDependencies;
+	
+	@Parameter(defaultValue = "false")
+	private boolean test;
 
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		try {
-			// Source directory JPA information...
-			JpaInfo srcDirInfo = SourceDirectory.getJpaInfo(new File(mavenProject.getBuild().getSourceDirectory()));
-
-			// JAR files with JPA information...
-			List<JpaInfo> jarInfoList = new LinkedList<JpaInfo>();
-
-			Set<Artifact> dependencies = mavenProject.getArtifacts();
-			for (Artifact artifact : dependencies) {
-				JpaInfo tmpInfo = JarFile.getJpaInfo(artifact.getFile());
-				if (tmpInfo != null)
-					jarInfoList.add(tmpInfo);
-			}
-			
-			// Global JPA information...
-			JpaInfo[] jpaInfoArray = new JpaInfo[jarInfoList.size() + 1];
-			jpaInfoArray[0] = srcDirInfo;
-			for (int i = 1; i < jpaInfoArray.length; i++) {
-				jpaInfoArray[i] = jarInfoList.get(i - 1);
-			}
-			JpaInfo globalJpaInfo = new JpaInfo(jpaInfoArray);
+			JpaInfo globalJpaInfo = getJpaInfo(mavenProject, processDependencies, test);
 			
 			// persistence.xml classes
 			StringBuilder sb = new StringBuilder();
