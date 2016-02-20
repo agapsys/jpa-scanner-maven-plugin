@@ -12,10 +12,7 @@ The first build may take a long time as Maven downloads all the dependencies.
 
 JPA Scanner Maven Plugin project requires Java 6 compatible runtime and depends on the following external libraries:
 
-* XStream
-* Maven plugin API
-* Maven core
-* JavaParser
+* Agapsys Scanner Maven Plugin Library (https://github.com/agapsys/scanner-maven-plugin-lib)
 * Maven plugin annotations
 
 For detailed information on external dependencies please see *pom.xml*.
