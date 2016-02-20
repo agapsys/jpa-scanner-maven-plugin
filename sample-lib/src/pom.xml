@@ -22,12 +22,14 @@ limitations under the License.
     <artifactId>sample-lib</artifactId>
     <version>0.1.0</version>
     <packaging>jar</packaging>
-    <properties>
+    
+	<properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
     </properties>
-    <name>sample-lib (JPA Scanner Maven Plugin)</name>
+    
+	<name>sample-lib (JPA Scanner Maven Plugin)</name>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -52,7 +54,7 @@ limitations under the License.
 		<plugins>
 			<plugin>
 				<groupId>com.agapsys.plugins</groupId>
-				<artifactId>jpa-scanner-plugin</artifactId>
+				<artifactId>jpa-scanner-maven-plugin</artifactId>
 				<version>0.1.0-SNAPSHOT</version>
 				<executions>
 					<execution>
@@ -68,8 +70,8 @@ limitations under the License.
 							<goal>create</goal>
 						</goals>
 						<configuration>
-							<processDependencies>true</processDependencies>
-							<test>true</test>
+							<includeDependencies>true</includeDependencies>
+							<includeTests>true</includeTests>
 						</configuration>
 					</execution>
 					<execution>
@@ -79,8 +81,8 @@ limitations under the License.
 							<goal>list</goal>
 						</goals>
 						<configuration>
-							<processDependencies>true</processDependencies>
-							<test>true</test>
+							<includeDependencies>true</includeDependencies>
+							<includeTests>true</includeTests>
 						</configuration>
 					</execution>
 				</executions>
