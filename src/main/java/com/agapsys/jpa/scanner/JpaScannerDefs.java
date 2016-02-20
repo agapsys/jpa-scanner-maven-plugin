@@ -30,6 +30,9 @@ public class JpaScannerDefs extends ScannerDefs {
 	public static JpaScannerDefs getInstance() {
 		return SINGLETON;
 	}
+	
+	public static final String OPTION_INCLUDE_DEPENDENCIES = "includeDependencies";
+	public static final String OPTION_INCLUDE_TESTS        = "includeTests";
 	// =========================================================================
 	
 	// INSTANCE SCOPE ==========================================================
