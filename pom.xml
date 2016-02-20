@@ -20,13 +20,13 @@ limitations under the License.
 	<modelVersion>4.0.0</modelVersion>
      
 	<groupId>com.agapsys.plugins</groupId>
-	<artifactId>jpa-scanner-plugin</artifactId>
+	<artifactId>jpa-scanner-maven-plugin</artifactId>
 	<version>0.1.0-SNAPSHOT</version>
 	<packaging>maven-plugin</packaging>
      
 	<name>JPA Scanner Maven Plugin</name>
 	<description>JPA Scanner Maven Plugin</description>
-	<url>https://github.com/agapsys/jpa-scanner-plugin/</url>
+	<url>https://github.com/agapsys/jpa-scanner-maven-plugin/</url>
 	
 	<licenses>
 		<license>
@@ -45,8 +45,8 @@ limitations under the License.
 	</developers>
 	
 	<scm>
-		<connection>scm:git:git@github.com:agapsys/jpa-scanner-plugin.git</connection>
-		<url>git@github.com:agapsys/jpa-scanner-plugin.git</url>
+		<connection>scm:git:git@github.com:agapsys/jpa-scanner-maven-plugin.git</connection>
+		<url>git@github.com:agapsys/jpa-scanner-maven-plugin.git</url>
 	</scm>
 	
 	<organization>
@@ -64,7 +64,7 @@ limitations under the License.
 		<!-- Compile dependencies -->
 		<dependency>
 			<groupId>com.agapsys.libs</groupId>
-			<artifactId>maven-scanner</artifactId>
+			<artifactId>scanner-maven-plugin-lib</artifactId>
 			<version>0.1.0-SNAPSHOT</version>
 		</dependency>
 		
@@ -90,9 +90,9 @@ limitations under the License.
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-plugin-plugin</artifactId>
-				<version>3.2</version>
+				<version>3.4</version>
 				<configuration>
-					<!-- see http://jira.codehaus.org/browse/MNG-5346 -->
+					<!-- See http://jira.codehaus.org/browse/MNG-5346 -->  
 					<skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
 				</configuration>
 
