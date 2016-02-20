@@ -38,9 +38,12 @@ public class JpaListMojo extends AbstractListMojo {
 		return mavenProject;
 	}
 
+	@Parameter(defaultValue = "jpa-classes")
+	private String filterProperty;
+	
 	@Override
 	protected String getFilterPropertyName() {
-		return "jpa-classes";
+		return filterProperty;
 	}
 
 	@Override
