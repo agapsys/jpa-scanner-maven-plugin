@@ -16,16 +16,17 @@
 
 package com.agapsys.jpa.scanner;
 
+import com.agapsys.mvn.scanner.parser.ParsingException;
+import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class SourceDirectoryTest {
 	
 	@Test
-	public void test() {
-		JpaInfo srcDirInfo = SourceDirectory.getJpaInfo(Defs.LIB_SRC_DIR);
-		
-		JpaInfo expectedInfo = new JpaInfo(
+	public void test() throws ParsingException {
+		Set<String> scannedInfo = TestUtils.scanJpaClasses(Defs.LIB_SRC_DIR);
+		Set<String> expectedInfo = TestUtils.getStringList(
 			"com.example.Converter1",
 			"com.example.Converter2",
 			"com.example.Converter2.InnerConverter",
@@ -36,6 +37,6 @@ public class SourceDirectoryTest {
 			"com.example.SimpleEnum.InnerConverter"
 		);
 		
-		Assert.assertEquals(expectedInfo, srcDirInfo);
+		Assert.assertEquals(expectedInfo, scannedInfo);
 	}
 }

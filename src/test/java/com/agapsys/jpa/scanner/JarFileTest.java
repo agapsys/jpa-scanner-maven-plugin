@@ -16,15 +16,17 @@
 
 package com.agapsys.jpa.scanner;
 
+import com.agapsys.mvn.scanner.parser.ParsingException;
+import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class JarFileTest {
 	
 	@Test
-	public void test() {
-		
-		JpaInfo expectedJarInfo = new JpaInfo(
+	public void test() throws ParsingException {
+		Set<String> scannedInfo = TestUtils.getEmbeddedInfo(Defs.LIB_JAR);
+		Set<String> expectedInfo = TestUtils.getStringList(
 			"com.example.Converter2.InnerConverter",
 			"com.example.Converter2",
 			"com.example.Converter3",
@@ -35,8 +37,6 @@ public class JarFileTest {
 			"com.example.Entity1"
 		);
 		
-		JpaInfo jarInfo = JarFile.getJpaInfo(Defs.LIB_JAR);
-		
-		Assert.assertEquals(expectedJarInfo, jarInfo);
+		Assert.assertEquals(expectedInfo, scannedInfo);
 	}
 }

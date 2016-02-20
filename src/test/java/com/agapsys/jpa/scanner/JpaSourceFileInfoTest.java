@@ -16,65 +16,38 @@
 
 package com.agapsys.jpa.scanner;
 
-import com.github.javaparser.JavaParser;
-import com.github.javaparser.ParseException;
-import com.github.javaparser.ast.CompilationUnit;
+import com.agapsys.mvn.scanner.parser.ParsingException;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ClassVisitorTest {
+public class JpaSourceFileInfoTest {
+	
 	
 	@Test
-	public void test() throws FileNotFoundException, ParseException, IOException {
+	public void test() throws ParsingException {
 		String fileSeparator = System.getProperty("file.separator");
-		
+		File srcFile = new File(Defs.LIB_SRC_DIR, String.format("com%sexample%sConverter2.java", fileSeparator, fileSeparator));
+
 		Set<String> expectedClasses = new LinkedHashSet<String>();
 		expectedClasses.add("com.example.Converter2");
 		expectedClasses.add("com.example.Converter2.InnerConverter");
 		
-		File srcFile = new File(Defs.LIB_SRC_DIR, String.format("com%sexample%sConverter2.java", fileSeparator, fileSeparator));
-
-		FileInputStream fis = new FileInputStream(srcFile);
-
-		CompilationUnit cu;
-		try {
-			cu = JavaParser.parse(fis);
-		} finally {
-			fis.close();
-		}
-
-		ClassVisitor cv = new ClassVisitor();
-		cv.visit(cu, null);
-		
-		Assert.assertEquals(expectedClasses, cv.getJpaClasses());
+		Set<String> scannedClasses = TestUtils.scanJpaClasses(srcFile);
+		Assert.assertEquals(expectedClasses, scannedClasses);
 	}
 	
 	@Test
-	public void testInvalidEntity() throws FileNotFoundException, ParseException, IOException {
+	public void testInvalidEntity() throws ParsingException {
 		String fileSeparator = System.getProperty("file.separator");
 		
-		Set<String> expectedClasses = new LinkedHashSet<String>();
-		
 		File srcFile = new File(Defs.LIB_SRC_DIR, String.format("com%sexample%sInvalidEntity.java", fileSeparator, fileSeparator));
-
-		FileInputStream fis = new FileInputStream(srcFile);
-
-		CompilationUnit cu;
-		try {
-			cu = JavaParser.parse(fis);
-		} finally {
-			fis.close();
-		}
-
-		ClassVisitor cv = new ClassVisitor();
 		
-		cv.visit(cu, null);
-		Assert.assertEquals(expectedClasses, cv.getJpaClasses());
+		Set<String> expectedClasses = new LinkedHashSet<String>();
+		Set<String> scannedClasses = TestUtils.scanJpaClasses(srcFile);
+		
+		Assert.assertEquals(expectedClasses, scannedClasses);
 	}
 }

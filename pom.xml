@@ -63,29 +63,11 @@ limitations under the License.
 	<dependencies>
 		<!-- Compile dependencies -->
 		<dependency>
-			<groupId>com.thoughtworks.xstream</groupId>
-			<artifactId>xstream</artifactId>
-			<version>1.4.8</version>
+			<groupId>com.agapsys.libs</groupId>
+			<artifactId>maven-scanner</artifactId>
+			<version>0.1.0-SNAPSHOT</version>
 		</dependency>
 		
-		<dependency>
-			<groupId>org.apache.maven</groupId>
-			<artifactId>maven-plugin-api</artifactId>
-			<version>2.2.1</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.apache.maven</groupId>
-			<artifactId>maven-core</artifactId>
-			<version>2.2.1</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.github.javaparser</groupId>
-			<artifactId>javaparser-core</artifactId>
-			<version>2.2.2</version>
-		</dependency>
-     
 		<!-- Provided dependencies -->
 		<dependency>
 			<groupId>org.apache.maven.plugin-tools</groupId>
