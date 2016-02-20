@@ -68,10 +68,13 @@ public class JpaSourceDirectoryScanner extends SourceDirectoryScanner {
 			currentClassInfo = currentClassInfo.containerClass;
 		} while (currentClassInfo != null);
 		
+		if (!accessible)
+			return false;
+		
 		boolean hasEntityAnnotation = containsAnnotationClass(classInfo, ENTITY_ANNOTATION_CLASS);
 		boolean isConverter = containsAnnotationClass(classInfo, CONVERTER_ANNOTATION_CLASS) && classInfo.implementedInterfaces.contains(ATTRIBUTE_CONVERTER_INTERFACE_CLASS);
 		
-		return accessible && (hasEntityAnnotation || isConverter);				
+		return (hasEntityAnnotation || isConverter);				
 	}
 	// =========================================================================
 }
