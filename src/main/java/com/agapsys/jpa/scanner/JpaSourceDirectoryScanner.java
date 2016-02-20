@@ -18,6 +18,7 @@ package com.agapsys.jpa.scanner;
 import com.agapsys.mvn.scanner.SourceDirectoryScanner;
 import com.agapsys.mvn.scanner.parser.AnnotationInfo;
 import com.agapsys.mvn.scanner.parser.ClassInfo;
+import com.agapsys.mvn.scanner.parser.ParsingException;
 import com.agapsys.mvn.scanner.parser.Visibility;
 
 /**
@@ -50,7 +51,7 @@ public class JpaSourceDirectoryScanner extends SourceDirectoryScanner {
 	private static final String ATTRIBUTE_CONVERTER_INTERFACE_CLASS = "javax.persistence.AttributeConverter";
 	
 	@Override
-	protected boolean isValid(ClassInfo classInfo) {
+	protected boolean shallBeIncluded(ClassInfo classInfo) throws ParsingException {
 		boolean accessible = true;
 		
 		ClassInfo currentClassInfo = classInfo;
