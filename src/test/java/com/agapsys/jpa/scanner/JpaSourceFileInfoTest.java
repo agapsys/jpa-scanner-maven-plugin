@@ -18,8 +18,8 @@ package com.agapsys.jpa.scanner;
 
 import com.agapsys.mvn.scanner.parser.ParsingException;
 import java.io.File;
-import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.TreeSet;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -31,9 +31,10 @@ public class JpaSourceFileInfoTest {
 		String fileSeparator = System.getProperty("file.separator");
 		File srcFile = new File(Defs.LIB_SRC_DIR, String.format("com%sexample%sConverter2.java", fileSeparator, fileSeparator));
 
-		Set<String> expectedClasses = new LinkedHashSet<String>();
-		expectedClasses.add("com.example.Converter2");
-		expectedClasses.add("com.example.Converter2.InnerConverter");
+		Set<String> expectedClasses = TestUtils.getStringSet(
+			"com.example.Converter2",
+			"com.example.Converter2.InnerConverter"
+		);
 		
 		Set<String> scannedClasses = TestUtils.scanJpaClasses(srcFile);
 		Assert.assertEquals(expectedClasses, scannedClasses);
@@ -45,7 +46,7 @@ public class JpaSourceFileInfoTest {
 		
 		File srcFile = new File(Defs.LIB_SRC_DIR, String.format("com%sexample%sInvalidEntity.java", fileSeparator, fileSeparator));
 		
-		Set<String> expectedClasses = new LinkedHashSet<String>();
+		Set<String> expectedClasses = new TreeSet<String>();
 		Set<String> scannedClasses = TestUtils.scanJpaClasses(srcFile);
 		
 		Assert.assertEquals(expectedClasses, scannedClasses);

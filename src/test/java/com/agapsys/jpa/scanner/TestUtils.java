@@ -19,8 +19,8 @@ import com.agapsys.mvn.scanner.ScanInfo;
 import com.agapsys.mvn.scanner.parser.ClassInfo;
 import com.agapsys.mvn.scanner.parser.ParsingException;
 import java.io.File;
-import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  *
@@ -39,7 +39,7 @@ public class TestUtils {
 	public static Set<String> scanJpaClasses(File srcDirOrFile) throws ParsingException {
 		
 		Set<ClassInfo> classInfoSet = JpaSourceDirectoryScanner.getInstance().getFilteredClasses(srcDirOrFile);
-		Set<String> classNameSet = new LinkedHashSet<String>();
+		Set<String> classNameSet = new TreeSet<String>();
 		
 		for (ClassInfo classInfo : classInfoSet) {
 			classNameSet.add(classInfo.className);
@@ -49,7 +49,7 @@ public class TestUtils {
 	}
 	
 	public static Set<String> getStringSet(String...elements) {
-		Set<String> stringList = new LinkedHashSet<String>();
+		Set<String> stringList = new TreeSet<String>();
 		
 		for (String element : elements) {
 			if (element == null || element.trim().isEmpty())
