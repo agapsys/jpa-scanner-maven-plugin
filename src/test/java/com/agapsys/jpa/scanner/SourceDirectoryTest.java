@@ -26,7 +26,7 @@ public class SourceDirectoryTest {
 	@Test
 	public void test() throws ParsingException {
 		Set<String> scannedInfo = TestUtils.scanJpaClasses(Defs.LIB_SRC_DIR);
-		Set<String> expectedInfo = TestUtils.getStringList(
+		Set<String> expectedInfo = TestUtils.getStringSet(
 			"com.example.Converter1",
 			"com.example.Converter2",
 			"com.example.Converter2.InnerConverter",

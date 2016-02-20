@@ -48,7 +48,7 @@ public class TestUtils {
 		return classNameSet;
 	}
 	
-	public static Set<String> getStringList(String...elements) {
+	public static Set<String> getStringSet(String...elements) {
 		Set<String> stringList = new LinkedHashSet<String>();
 		
 		for (String element : elements) {
