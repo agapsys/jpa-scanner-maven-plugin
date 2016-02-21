@@ -46,9 +46,8 @@ public class JpaSourceDirectoryScanner extends SourceDirectoryScanner {
 	// INSTANCE SCOPE ==========================================================
 	private JpaSourceDirectoryScanner() {}
 	
-	private static final String ENTITY_ANNOTATION_CLASS            = "javax.persistence.Entity";
-	private static final String CONVERTER_ANNOTATION_CLASS        = "javax.persistence.Converter";
-	private static final String ATTRIBUTE_CONVERTER_INTERFACE_CLASS = "javax.persistence.AttributeConverter";
+	private static final String ENTITY_ANNOTATION_CLASS     = "javax.persistence.Entity";
+	private static final String CONVERTER_ANNOTATION_CLASS = "javax.persistence.Converter";
 	
 	@Override
 	protected boolean shallBeIncluded(ClassInfo classInfo) throws ParsingException {
@@ -73,7 +72,7 @@ public class JpaSourceDirectoryScanner extends SourceDirectoryScanner {
 			return false;
 		
 		boolean hasEntityAnnotation = containsAnnotationClass(classInfo, ENTITY_ANNOTATION_CLASS);
-		boolean isConverter = containsAnnotationClass(classInfo, CONVERTER_ANNOTATION_CLASS) && classInfo.implementedInterfaces.contains(ATTRIBUTE_CONVERTER_INTERFACE_CLASS);
+		boolean isConverter = containsAnnotationClass(classInfo, CONVERTER_ANNOTATION_CLASS);
 		
 		return (hasEntityAnnotation || isConverter);				
 	}
