@@ -56,7 +56,7 @@ public class JpaListMojo extends AbstractListMojo {
 		return JpaScannerDefs.getInstance();
 	}
 	
-	@Parameter(defaultValue = "false", name = JpaScannerDefs.OPTION_INCLUDE_DEPENDENCIES)
+	@Parameter(defaultValue = "true", name = JpaScannerDefs.OPTION_INCLUDE_DEPENDENCIES)
 	private boolean includeDependencies;
 
 	@Override
