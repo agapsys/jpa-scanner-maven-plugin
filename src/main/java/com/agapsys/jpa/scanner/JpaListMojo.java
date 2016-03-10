@@ -15,8 +15,10 @@
  */
 package com.agapsys.jpa.scanner;
 
+import static com.agapsys.jpa.scanner.JpaScannerDefs.log;
 import com.agapsys.mvn.scanner.AbstractListMojo;
 import com.agapsys.mvn.scanner.ScannerDefs;
+import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -70,5 +72,12 @@ public class JpaListMojo extends AbstractListMojo {
 	@Override
 	protected boolean includeTests() {
 		return includeTests;
+	}
+	
+	@Override
+	public void execute() throws MojoExecutionException {
+		log("Listing JPA classes...");
+		super.execute();
+		log("Done!");
 	}
 }

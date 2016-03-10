@@ -15,6 +15,7 @@
  */
 package com.agapsys.jpa.scanner;
 
+import static com.agapsys.jpa.scanner.JpaScannerDefs.log;
 import com.agapsys.mvn.scanner.SourceDirectoryScanner;
 import com.agapsys.mvn.scanner.parser.AnnotationInfo;
 import com.agapsys.mvn.scanner.parser.ClassInfo;
@@ -75,6 +76,11 @@ public class JpaSourceDirectoryScanner extends SourceDirectoryScanner {
 		boolean isConverter = containsAnnotationClass(classInfo, CONVERTER_ANNOTATION_CLASS);
 		
 		return (hasEntityAnnotation || isConverter);				
+	}
+	
+	@Override
+	protected void beforeInclude(ClassInfo classInfo) {
+		log("Detected JPA class: %s", classInfo.className);
 	}
 	// =========================================================================
 }

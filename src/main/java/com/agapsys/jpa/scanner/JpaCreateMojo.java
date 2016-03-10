@@ -15,8 +15,10 @@
  */
 package com.agapsys.jpa.scanner;
 
+import static com.agapsys.jpa.scanner.JpaScannerDefs.log;
 import com.agapsys.mvn.scanner.AbstractCreateMojo;
 import com.agapsys.mvn.scanner.ScannerDefs;
+import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -58,4 +60,11 @@ public class JpaCreateMojo extends AbstractCreateMojo {
 	protected ScannerDefs getScannerDefs() {
 		return JpaScannerDefs.getInstance();
 	}
+	
+	@Override
+	public void execute() throws MojoExecutionException {
+		log("Creating '%s'...", getScannerDefs().getEmbeddedScanInfoFilePath());
+		super.execute();
+		log("Done!");
+	}	
 }
