@@ -24,31 +24,31 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class JpaSourceFileInfoTest {
-	
-	
-	@Test
-	public void test() throws ParsingException {
-		String fileSeparator = System.getProperty("file.separator");
-		File srcFile = new File(Defs.LIB_SRC_DIR, String.format("com%sexample%sConverter2.java", fileSeparator, fileSeparator));
+    
+    
+    @Test
+    public void test() throws ParsingException {
+        String fileSeparator = System.getProperty("file.separator");
+        File srcFile = new File(Defs.LIB_SRC_DIR, String.format("com%sexample%sConverter2.java", fileSeparator, fileSeparator));
 
-		Set<String> expectedClasses = TestUtils.getStringSet(
-			"com.example.Converter2",
-			"com.example.Converter2.InnerConverter"
-		);
-		
-		Set<String> scannedClasses = TestUtils.scanJpaClasses(srcFile);
-		Assert.assertEquals(expectedClasses, scannedClasses);
-	}
-	
-	@Test
-	public void testInvalidEntity() throws ParsingException {
-		String fileSeparator = System.getProperty("file.separator");
-		
-		File srcFile = new File(Defs.LIB_SRC_DIR, String.format("com%sexample%sInvalidEntity.java", fileSeparator, fileSeparator));
-		
-		Set<String> expectedClasses = new TreeSet<String>();
-		Set<String> scannedClasses = TestUtils.scanJpaClasses(srcFile);
-		
-		Assert.assertEquals(expectedClasses, scannedClasses);
-	}
+        Set<String> expectedClasses = TestUtils.getStringSet(
+            "com.example.Converter2",
+            "com.example.Converter2.InnerConverter"
+        );
+        
+        Set<String> scannedClasses = TestUtils.scanJpaClasses(srcFile);
+        Assert.assertEquals(expectedClasses, scannedClasses);
+    }
+    
+    @Test
+    public void testInvalidEntity() throws ParsingException {
+        String fileSeparator = System.getProperty("file.separator");
+        
+        File srcFile = new File(Defs.LIB_SRC_DIR, String.format("com%sexample%sInvalidEntity.java", fileSeparator, fileSeparator));
+        
+        Set<String> expectedClasses = new TreeSet<String>();
+        Set<String> scannedClasses = TestUtils.scanJpaClasses(srcFile);
+        
+        Assert.assertEquals(expectedClasses, scannedClasses);
+    }
 }

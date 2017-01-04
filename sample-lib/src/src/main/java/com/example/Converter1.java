@@ -22,13 +22,13 @@ import javax.persistence.Converter;
 @Converter
 public class Converter1 implements AttributeConverter<Object, String>{
 
-	@Override
-	public String convertToDatabaseColumn(Object attribute) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
+    @Override
+    public String convertToDatabaseColumn(Object attribute) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	@Override
-	public Object convertToEntityAttribute(String dbData) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
+    @Override
+    public Object convertToEntityAttribute(String dbData) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

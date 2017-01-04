@@ -21,30 +21,30 @@ import javax.persistence.Converter;
 
 @Converter
 public class Converter2 implements AttributeConverter<Object, String> {
-	// CLASS SCOPE =============================================================
-	@Converter
-	public static class InnerConverter implements AttributeConverter<Object, String> {
-		@Override
-		public String convertToDatabaseColumn(Object attribute) {
-			throw new UnsupportedOperationException("Not supported yet.");
-		}
+    // CLASS SCOPE =============================================================
+    @Converter
+    public static class InnerConverter implements AttributeConverter<Object, String> {
+        @Override
+        public String convertToDatabaseColumn(Object attribute) {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
 
-		@Override
-		public Object convertToEntityAttribute(String dbData) {
-			throw new UnsupportedOperationException("Not supported yet.");
-		}
-	}
-	// =========================================================================
-	
-	// INSTANCE SCOPE ==========================================================
-	@Override
-	public String convertToDatabaseColumn(Object attribute) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
+        @Override
+        public Object convertToEntityAttribute(String dbData) {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
+    }
+    // =========================================================================
+    
+    // INSTANCE SCOPE ==========================================================
+    @Override
+    public String convertToDatabaseColumn(Object attribute) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	@Override
-	public Object convertToEntityAttribute(String dbData) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-	// =========================================================================
+    @Override
+    public Object convertToEntityAttribute(String dbData) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    // =========================================================================
 }

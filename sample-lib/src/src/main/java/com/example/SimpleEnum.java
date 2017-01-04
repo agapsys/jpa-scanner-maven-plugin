@@ -20,27 +20,27 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 public enum SimpleEnum {
-	ENUM1,
-	ENUM2;
-	
-	// CLASS SCOPE =============================================================
-	@Converter
-	public static class InnerConverter implements AttributeConverter<Object, String> {
-		public static class MyClass {}
-		
-		@Override
-		public String convertToDatabaseColumn(Object attribute) {
-			throw new UnsupportedOperationException("Not supported yet.");
-		}
+    ENUM1,
+    ENUM2;
+    
+    // CLASS SCOPE =============================================================
+    @Converter
+    public static class InnerConverter implements AttributeConverter<Object, String> {
+        public static class MyClass {}
+        
+        @Override
+        public String convertToDatabaseColumn(Object attribute) {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
 
-		@Override
-		public Object convertToEntityAttribute(String dbData) {
-			throw new UnsupportedOperationException("Not supported yet.");
-		}
-	}
-	// =========================================================================
+        @Override
+        public Object convertToEntityAttribute(String dbData) {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
+    }
+    // =========================================================================
 
-	// INSTANCE SCOPE ==========================================================
+    // INSTANCE SCOPE ==========================================================
 
-	// =========================================================================
+    // =========================================================================
 }

@@ -24,63 +24,62 @@ import com.agapsys.mvn.scanner.parser.Visibility;
 
 /**
  * JPA Implementation of Source Directory Scanner
- * @author Leandro Oliveira (leandro@agapsys.com)
  */
 public class JpaSourceDirectoryScanner extends SourceDirectoryScanner {
-	// STATIC SCOPE ============================================================
-	private static JpaSourceDirectoryScanner SINGLETON = new JpaSourceDirectoryScanner();
-	
-	public static JpaSourceDirectoryScanner getInstance() {
-		return SINGLETON;
-	}
-	
-	private static boolean containsAnnotationClass(ClassInfo classInfo, String annotationClassName) {
-		for (AnnotationInfo annotationInfo : classInfo.annotations) {
-			if (annotationInfo.className.equals(annotationClassName))
-				return true;
-		}
-		
-		return false;
-	}
-	// =========================================================================
-	
-	// INSTANCE SCOPE ==========================================================
-	private JpaSourceDirectoryScanner() {}
-	
-	private static final String ENTITY_ANNOTATION_CLASS     = "javax.persistence.Entity";
-	private static final String CONVERTER_ANNOTATION_CLASS = "javax.persistence.Converter";
-	
-	@Override
-	protected boolean shallBeIncluded(ClassInfo classInfo) throws ParsingException {
-		boolean accessible = true;
-		
-		ClassInfo currentClassInfo = classInfo;
-		do {
-			if (currentClassInfo.visibility != Visibility.PUBLIC) {
-				accessible = false;
-				break;
-			}
-			
-			if (currentClassInfo.containerClass != null && !currentClassInfo.isStaticNested) {
-				accessible = false;
-				break;
-			}
-			
-			currentClassInfo = currentClassInfo.containerClass;
-		} while (currentClassInfo != null);
-		
-		if (!accessible)
-			return false;
-		
-		boolean hasEntityAnnotation = containsAnnotationClass(classInfo, ENTITY_ANNOTATION_CLASS);
-		boolean isConverter = containsAnnotationClass(classInfo, CONVERTER_ANNOTATION_CLASS);
-		
-		return (hasEntityAnnotation || isConverter);				
-	}
-	
-	@Override
-	protected void beforeInclude(ClassInfo classInfo) {
-		log("Detected JPA class: %s", classInfo.className);
-	}
-	// =========================================================================
+    // STATIC SCOPE ============================================================
+    private static JpaSourceDirectoryScanner SINGLETON = new JpaSourceDirectoryScanner();
+
+    public static JpaSourceDirectoryScanner getInstance() {
+        return SINGLETON;
+    }
+
+    private static boolean containsAnnotationClass(ClassInfo classInfo, String annotationClassName) {
+        for (AnnotationInfo annotationInfo : classInfo.annotations) {
+            if (annotationInfo.className.equals(annotationClassName))
+                return true;
+        }
+
+        return false;
+    }
+    // =========================================================================
+
+    // INSTANCE SCOPE ==========================================================
+    private JpaSourceDirectoryScanner() {}
+
+    private static final String ENTITY_ANNOTATION_CLASS     = "javax.persistence.Entity";
+    private static final String CONVERTER_ANNOTATION_CLASS = "javax.persistence.Converter";
+
+    @Override
+    protected boolean shallBeIncluded(ClassInfo classInfo) throws ParsingException {
+        boolean accessible = true;
+
+        ClassInfo currentClassInfo = classInfo;
+        do {
+            if (currentClassInfo.visibility != Visibility.PUBLIC) {
+                accessible = false;
+                break;
+            }
+
+            if (currentClassInfo.containerClass != null && !currentClassInfo.isStaticNested) {
+                accessible = false;
+                break;
+            }
+
+            currentClassInfo = currentClassInfo.containerClass;
+        } while (currentClassInfo != null);
+
+        if (!accessible)
+            return false;
+
+        boolean hasEntityAnnotation = containsAnnotationClass(classInfo, ENTITY_ANNOTATION_CLASS);
+        boolean isConverter = containsAnnotationClass(classInfo, CONVERTER_ANNOTATION_CLASS);
+
+        return (hasEntityAnnotation || isConverter);
+    }
+
+    @Override
+    protected void beforeInclude(ClassInfo classInfo) {
+        log("Detected JPA class: %s", classInfo.className);
+    }
+    // =========================================================================
 }

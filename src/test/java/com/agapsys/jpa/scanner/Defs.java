@@ -19,17 +19,17 @@ package com.agapsys.jpa.scanner;
 import java.io.File;
 
 public class Defs {
-	// CLASS SCOPE =============================================================
-	public static final File LIB_JAR;
-	public static final File LIB_SRC_DIR;
-	
-	static {
-		LIB_JAR = new File("sample-lib/sample-lib-0.1.0.jar");
-		LIB_SRC_DIR = new File("sample-lib/src/src/main/java");
-	}
-	// =========================================================================
+    // CLASS SCOPE =============================================================
+    public static final File LIB_JAR;
+    public static final File LIB_SRC_DIR;
+    
+    static {
+        LIB_JAR = new File("sample-lib/sample-lib-0.1.0.jar");
+        LIB_SRC_DIR = new File("sample-lib/src/src/main/java");
+    }
+    // =========================================================================
 
-	// INSTANCE SCOPE ==========================================================
-	private Defs() {}
-	// =========================================================================
+    // INSTANCE SCOPE ==========================================================
+    private Defs() {}
+    // =========================================================================
 }

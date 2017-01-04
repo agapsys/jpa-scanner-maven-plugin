@@ -27,44 +27,43 @@ import org.apache.maven.project.MavenProject;
 
 /**
  * JPA implementation of AbstractCreateMojo
- * @author Leandro Oliveira (leandro@agapsys.com)
  */
 @Mojo(name = "create", defaultPhase = LifecyclePhase.GENERATE_RESOURCES, requiresDependencyResolution = ResolutionScope.COMPILE)
 public class JpaCreateMojo extends AbstractCreateMojo {
 
-	@Parameter(property = "project", readonly = true)
-	private MavenProject mavenProject;
-	
-	@Override
-	protected MavenProject getMavenProject() {
-		return mavenProject;
-	}
-	
-	@Parameter(defaultValue = "false", name = JpaScannerDefs.OPTION_INCLUDE_DEPENDENCIES)
-	private boolean includeDependencies;
+    @Parameter(property = "project", readonly = true)
+    private MavenProject mavenProject;
 
-	@Override
-	protected boolean includeDependencies() {
-		return includeDependencies;
-	}
-	
-	@Parameter(defaultValue = "false", name = JpaScannerDefs.OPTION_INCLUDE_TESTS)
-	private boolean includeTests;
+    @Override
+    protected MavenProject getMavenProject() {
+        return mavenProject;
+    }
 
-	@Override
-	protected boolean includeTests() {
-		return includeTests;
-	}
-	
-	@Override
-	protected ScannerDefs getScannerDefs() {
-		return JpaScannerDefs.getInstance();
-	}
-	
-	@Override
-	public void execute() throws MojoExecutionException {
-		log("Creating '%s'...", getScannerDefs().getEmbeddedScanInfoFilePath());
-		super.execute();
-		log("Done!");
-	}	
+    @Parameter(defaultValue = "false", name = JpaScannerDefs.OPTION_INCLUDE_DEPENDENCIES)
+    private boolean includeDependencies;
+
+    @Override
+    protected boolean includeDependencies() {
+        return includeDependencies;
+    }
+
+    @Parameter(defaultValue = "false", name = JpaScannerDefs.OPTION_INCLUDE_TESTS)
+    private boolean includeTests;
+
+    @Override
+    protected boolean includeTests() {
+        return includeTests;
+    }
+
+    @Override
+    protected ScannerDefs getScannerDefs() {
+        return JpaScannerDefs.getInstance();
+    }
+
+    @Override
+    public void execute() throws MojoExecutionException {
+        log("Creating '%s'...", getScannerDefs().getEmbeddedScanInfoFilePath());
+        super.execute();
+        log("Done!");
+    }
 }

@@ -22,21 +22,21 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class JarFileTest {
-	
-	@Test
-	public void test() throws ParsingException {
-		Set<String> scannedInfo = TestUtils.getEmbeddedInfo(Defs.LIB_JAR);
-		Set<String> expectedInfo = TestUtils.getStringSet(
-			"com.example.Converter2.InnerConverter",
-			"com.example.Converter2",
-			"com.example.Converter3",
-			"com.example.Entity2",
-			"com.example.Entity3",
-			"com.example.SimpleEnum.InnerConverter",
-			"com.example.Converter1",
-			"com.example.Entity1"
-		);
-		
-		Assert.assertEquals(expectedInfo, scannedInfo);
-	}
+    
+    @Test
+    public void test() throws ParsingException {
+        Set<String> scannedInfo = TestUtils.getEmbeddedInfo(Defs.LIB_JAR);
+        Set<String> expectedInfo = TestUtils.getStringSet(
+            "com.example.Converter2.InnerConverter",
+            "com.example.Converter2",
+            "com.example.Converter3",
+            "com.example.Entity2",
+            "com.example.Entity3",
+            "com.example.SimpleEnum.InnerConverter",
+            "com.example.Converter1",
+            "com.example.Entity1"
+        );
+        
+        Assert.assertEquals(expectedInfo, scannedInfo);
+    }
 }

@@ -21,43 +21,42 @@ import com.agapsys.mvn.scanner.SourceDirectoryScanner;
 
 /**
  * JPA implementation of ScannerDefs
- * @author Leandro Oliveira (leandro@agapsys.com)
  */
 public class JpaScannerDefs extends ScannerDefs {
-	// STATIC SCOPE ============================================================
-	private static final JpaScannerDefs SINGLETON = new JpaScannerDefs();
-	
-	public static JpaScannerDefs getInstance() {
-		return SINGLETON;
-	}
-	
-	public static final String OPTION_INCLUDE_DEPENDENCIES = "includeDependencies";
-	public static final String OPTION_INCLUDE_TESTS        = "includeTests";
-	
-	public static void log(String message, Object...msgArgs) {
-		if (msgArgs.length > 0)
-			message = String.format(message, msgArgs);
-		
-		System.out.println(message);
-	}
-	// =========================================================================
-	
-	// INSTANCE SCOPE ==========================================================
-	private JpaScannerDefs() {}
-	
-	@Override
-	public SourceDirectoryScanner getSourceDirectoryScanner() {
-		return JpaSourceDirectoryScanner.getInstance();
-	}
+    // STATIC SCOPE ============================================================
+    private static final JpaScannerDefs SINGLETON = new JpaScannerDefs();
 
-	@Override
-	public ScanInfo getScanInfoInstance() {
-		return new JpaScanInfo();
-	}
+    public static JpaScannerDefs getInstance() {
+        return SINGLETON;
+    }
 
-	@Override
-	public String getEmbeddedScanInfoFilename() {
-		return "jpa.info";
-	}
-	// =========================================================================	
+    public static final String OPTION_INCLUDE_DEPENDENCIES = "includeDependencies";
+    public static final String OPTION_INCLUDE_TESTS        = "includeTests";
+
+    public static void log(String message, Object...msgArgs) {
+        if (msgArgs.length > 0)
+            message = String.format(message, msgArgs);
+
+        System.out.println(message);
+    }
+    // =========================================================================
+
+    // INSTANCE SCOPE ==========================================================
+    private JpaScannerDefs() {}
+
+    @Override
+    public SourceDirectoryScanner getSourceDirectoryScanner() {
+        return JpaSourceDirectoryScanner.getInstance();
+    }
+
+    @Override
+    public ScanInfo getScanInfoInstance() {
+        return new JpaScanInfo();
+    }
+
+    @Override
+    public String getEmbeddedScanInfoFilename() {
+        return "jpa.info";
+    }
+    // =========================================================================
 }

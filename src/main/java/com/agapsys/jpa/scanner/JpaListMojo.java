@@ -27,57 +27,56 @@ import org.apache.maven.project.MavenProject;
 
 /**
  * JPA implementation of AbstractListMojo
- * @author Leandro Oliveira (leandro@agapsys.com)
  */
 @Mojo(name = "list", defaultPhase = LifecyclePhase.GENERATE_RESOURCES, requiresDependencyResolution = ResolutionScope.COMPILE)
 public class JpaListMojo extends AbstractListMojo {
 
-	@Parameter(property = "project", readonly = true)
-	private MavenProject mavenProject;
-	
-	@Override
-	protected MavenProject getMavenProject() {
-		return mavenProject;
-	}
+    @Parameter(property = "project", readonly = true)
+    private MavenProject mavenProject;
 
-	@Parameter(defaultValue = "jpa-classes")
-	private String filterProperty;
-	
-	@Override
-	protected String getFilterPropertyName() {
-		return filterProperty;
-	}
+    @Override
+    protected MavenProject getMavenProject() {
+        return mavenProject;
+    }
 
-	@Override
-	protected String getExposedEntry(String scanInfoEntry) {
-		return String.format("<class>%s</class>", scanInfoEntry);
-	}
+    @Parameter(defaultValue = "jpa-classes")
+    private String filterProperty;
 
-	@Override
-	protected ScannerDefs getScannerDefs() {
-		return JpaScannerDefs.getInstance();
-	}
-	
-	@Parameter(defaultValue = "true", name = JpaScannerDefs.OPTION_INCLUDE_DEPENDENCIES)
-	private boolean includeDependencies;
+    @Override
+    protected String getFilterPropertyName() {
+        return filterProperty;
+    }
 
-	@Override
-	protected boolean includeDependencies() {
-		return includeDependencies;
-	}
-	
-	@Parameter(defaultValue = "false", name = JpaScannerDefs.OPTION_INCLUDE_TESTS)
-	private boolean includeTests;
+    @Override
+    protected String getExposedEntry(String scanInfoEntry) {
+        return String.format("<class>%s</class>", scanInfoEntry);
+    }
 
-	@Override
-	protected boolean includeTests() {
-		return includeTests;
-	}
-	
-	@Override
-	public void execute() throws MojoExecutionException {
-		log("Listing JPA classes...");
-		super.execute();
-		log("Done!");
-	}
+    @Override
+    protected ScannerDefs getScannerDefs() {
+        return JpaScannerDefs.getInstance();
+    }
+
+    @Parameter(defaultValue = "true", name = JpaScannerDefs.OPTION_INCLUDE_DEPENDENCIES)
+    private boolean includeDependencies;
+
+    @Override
+    protected boolean includeDependencies() {
+        return includeDependencies;
+    }
+
+    @Parameter(defaultValue = "false", name = JpaScannerDefs.OPTION_INCLUDE_TESTS)
+    private boolean includeTests;
+
+    @Override
+    protected boolean includeTests() {
+        return includeTests;
+    }
+
+    @Override
+    public void execute() throws MojoExecutionException {
+        log("Listing JPA classes...");
+        super.execute();
+        log("Done!");
+    }
 }

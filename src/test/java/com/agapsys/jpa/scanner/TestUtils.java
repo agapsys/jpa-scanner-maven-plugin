@@ -22,42 +22,38 @@ import java.io.File;
 import java.util.Set;
 import java.util.TreeSet;
 
-/**
- *
- * @author Leandro Oliveira (leandro@agapsys.com)
- */
 public class TestUtils {
-	private TestUtils() {}
-	
-	public static Set<String> getEmbeddedInfo(File jarFile) throws ParsingException {
-		JpaScannerDefs defs = JpaScannerDefs.getInstance();
-		ScanInfo scanInfo = defs.getScanInfoInstance();
-		scanInfo.addJar(jarFile, defs.getEmbeddedScanInfoFilePath(), defs.getEmbeddedScanInfoFileEncoding());
-		return scanInfo.getEntries();
-	}
-	
-	public static Set<String> scanJpaClasses(File srcDirOrFile) throws ParsingException {
-		
-		Set<ClassInfo> classInfoSet = JpaSourceDirectoryScanner.getInstance().getFilteredClasses(srcDirOrFile);
-		Set<String> classNameSet = new TreeSet<String>();
-		
-		for (ClassInfo classInfo : classInfoSet) {
-			classNameSet.add(classInfo.className);
-		}
-		
-		return classNameSet;
-	}
-	
-	public static Set<String> getStringSet(String...elements) {
-		Set<String> stringList = new TreeSet<String>();
-		
-		for (String element : elements) {
-			if (element == null || element.trim().isEmpty())
-				throw new IllegalArgumentException("Null/Empty element");
-			
-			stringList.add(element);
-		}
-		
-		return stringList;
-	}
+    private TestUtils() {}
+
+    public static Set<String> getEmbeddedInfo(File jarFile) throws ParsingException {
+        JpaScannerDefs defs = JpaScannerDefs.getInstance();
+        ScanInfo scanInfo = defs.getScanInfoInstance();
+        scanInfo.addJar(jarFile, defs.getEmbeddedScanInfoFilePath(), defs.getEmbeddedScanInfoFileEncoding());
+        return scanInfo.getEntries();
+    }
+
+    public static Set<String> scanJpaClasses(File srcDirOrFile) throws ParsingException {
+
+        Set<ClassInfo> classInfoSet = JpaSourceDirectoryScanner.getInstance().getFilteredClasses(srcDirOrFile);
+        Set<String> classNameSet = new TreeSet<String>();
+
+        for (ClassInfo classInfo : classInfoSet) {
+            classNameSet.add(classInfo.className);
+        }
+
+        return classNameSet;
+    }
+
+    public static Set<String> getStringSet(String...elements) {
+        Set<String> stringList = new TreeSet<String>();
+
+        for (String element : elements) {
+            if (element == null || element.trim().isEmpty())
+                throw new IllegalArgumentException("Null/Empty element");
+
+            stringList.add(element);
+        }
+
+        return stringList;
+    }
 }

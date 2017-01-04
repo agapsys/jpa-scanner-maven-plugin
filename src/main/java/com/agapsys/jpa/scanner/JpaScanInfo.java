@@ -20,13 +20,12 @@ import com.agapsys.mvn.scanner.parser.ClassInfo;
 
 /**
  * JPA implementation of ScanInfo
- * @author Leandro Oliveira (leandro@agapsys.com)
  */
 public class JpaScanInfo extends ScanInfo {
 
-	@Override
-	protected String getEntryString(ClassInfo classInfo) {
-		return classInfo.className;
-	}
-	
+    @Override
+    protected String getEntryString(ClassInfo classInfo) {
+        return classInfo.className;
+    }
+
 }

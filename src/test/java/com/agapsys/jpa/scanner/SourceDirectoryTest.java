@@ -22,21 +22,21 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class SourceDirectoryTest {
-	
-	@Test
-	public void test() throws ParsingException {
-		Set<String> scannedInfo = TestUtils.scanJpaClasses(Defs.LIB_SRC_DIR);
-		Set<String> expectedInfo = TestUtils.getStringSet(
-			"com.example.Converter1",
-			"com.example.Converter2",
-			"com.example.Converter2.InnerConverter",
-			"com.example.Converter3",
-			"com.example.Entity1",
-			"com.example.Entity2",
-			"com.example.Entity3",
-			"com.example.SimpleEnum.InnerConverter"
-		);
-		
-		Assert.assertEquals(expectedInfo, scannedInfo);
-	}
+    
+    @Test
+    public void test() throws ParsingException {
+        Set<String> scannedInfo = TestUtils.scanJpaClasses(Defs.LIB_SRC_DIR);
+        Set<String> expectedInfo = TestUtils.getStringSet(
+            "com.example.Converter1",
+            "com.example.Converter2",
+            "com.example.Converter2.InnerConverter",
+            "com.example.Converter3",
+            "com.example.Entity1",
+            "com.example.Entity2",
+            "com.example.Entity3",
+            "com.example.SimpleEnum.InnerConverter"
+        );
+        
+        Assert.assertEquals(expectedInfo, scannedInfo);
+    }
 }
