@@ -24,7 +24,7 @@ limitations under the License.
     <version>0.1.0</version>
     <packaging>maven-plugin</packaging>
 
-    <name>JPA Scanner Maven Plugin</name>
+    <name>JPA Class Scanner Maven Plugin</name>
     <description>JPA Scanner Maven Plugin</description>
     <url>https://github.com/agapsys/jpa-scanner-maven-plugin/</url>
 
