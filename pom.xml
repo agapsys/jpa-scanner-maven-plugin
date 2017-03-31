@@ -65,7 +65,7 @@ limitations under the License.
         <dependency>
             <groupId>com.agapsys</groupId>
             <artifactId>scanner-maven-plugin-lib</artifactId>
-            <version>0.1.0</version>
+            <version>[0.1.0, 1.0.0)</version>
         </dependency>
 
         <!-- Provided dependencies -->
